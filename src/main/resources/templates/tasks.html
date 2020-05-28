@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task overview</title>
+</head>
+<body>
+
+<h1>Tasks</h1>
+
+<p th:if="${tasks.isEmpty()}">No tasks left to do</p>
+<table th:unless="${tasks.isEmpty()}">
+    <tr>
+        <th>Title</th>
+        <th>Due date</th>
+    </tr>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.title}"></td>
+        <td th:text="${#temporals.format(task.dueDate, 'dd-MM-yyyy HH:mm')}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
