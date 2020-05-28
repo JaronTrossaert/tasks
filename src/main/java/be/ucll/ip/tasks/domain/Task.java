@@ -20,6 +20,10 @@ public class Task {
         this.dueDate = dueDate;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
