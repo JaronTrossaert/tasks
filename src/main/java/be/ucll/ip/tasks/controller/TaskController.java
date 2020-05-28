@@ -30,7 +30,7 @@ public class TaskController {
     @GetMapping("/{id}")
     public String getTask(Model model, @PathVariable("id") int id) {
         try {
-            model.addAttribute("task", taskService.getTask(id));
+            model.addAttribute("task", taskService.getTask((long) id));
         } catch (IllegalArgumentException e) {
             model.addAttribute("taskNotFound", e.getMessage());
         }

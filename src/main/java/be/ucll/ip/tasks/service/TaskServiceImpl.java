@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -19,13 +20,14 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getTasks() {
-        return repository.getTasks();
+    public List<TaskDTO> getTasks() {
+        return repository.findAll().stream().map(this::convert).collect(Collectors.toList());
     }
 
     @Override
-    public Task getTask(int id) {
-        return repository.getTask(id);
+    public TaskDTO getTask(Long id) {
+        return repository.findById(id).map(this::convert)
+                .orElseThrow(() -> new IllegalArgumentException("Task not found"));
     }
 
     @Override
@@ -34,6 +36,15 @@ public class TaskServiceImpl implements TaskService {
         task.setTitle(taskDTO.getTitle());
         task.setDescription(taskDTO.getDescription());
         task.setDueDate(taskDTO.getDueDate());
-        repository.addTask(task);
+        repository.save(task);
+    }
+
+    private TaskDTO convert(Task task) {
+        TaskDTO dto = new TaskDTO();
+        dto.setId(task.getId());
+        dto.setTitle(task.getTitle());
+        dto.setDescription(task.getDescription());
+        dto.setDueDate(task.getDueDate());
+        return dto;
     }
 }

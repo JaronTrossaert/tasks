@@ -1,24 +1,21 @@
 package be.ucll.ip.tasks.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
+@Entity
 public class Task {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String title;
     private String description;
     private LocalDateTime dueDate;
-
-    public Task() {
-    }
-
-    public Task(int id, String title, String description, LocalDateTime dueDate) {
-        this.id = (long) id;
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-    }
 
     public Long getId() {
         return id;
@@ -50,21 +47,5 @@ public class Task {
 
     public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
-    }
-
-    @Override
-    public String toString() {
-        String pattern = "hh:mm a";
-        return "Task " +
-                (this.id + 1) +
-                ": due " +
-                this.dueDate.getMonth() +
-                " " +
-                this.dueDate.getDayOfMonth() +
-                " " +
-                this.dueDate.getYear() +
-                " at " +
-                this.dueDate.getHour() +
-                this.dueDate.format(DateTimeFormatter.ofPattern(pattern));
     }
 }
