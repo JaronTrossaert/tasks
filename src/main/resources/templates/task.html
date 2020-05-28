@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task detail</title>
+</head>
+<body>
+
+<h1>Task detail</h1>
+
+<div th:if="${taskNotFound}"><span th:text="${taskNotFound}"></span></div>
+<div th:unless="${taskNotFound}">
+    <div>
+        <label for="title">Title:</label>
+        <span id="title" th:text="${task.title}"></span>
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <span id="description" th:text="${task.description}"></span>
+    </div>
+    <div>
+        <label for="dueDate">Due date:</label>
+        <span id="dueDate" th:text="${#temporals.format(task.dueDate, 'dd-MM-yyyy HH:mm')}"></span>
+    </div>
+</div>
+
+</body>
+</html>

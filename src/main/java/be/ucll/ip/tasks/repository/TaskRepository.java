@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class TasksRepository {
+public class TaskRepository {
 
     private List<Task> list;
 
-    public TasksRepository() {
+    public TaskRepository() {
         list = new ArrayList<>();
         list.add(new Task(0, "Groceries", "Need food!",
                 LocalDateTime.of(2020, 3, 20, 10, 0)));
@@ -24,5 +24,13 @@ public class TasksRepository {
 
     public List<Task> getTasks() {
         return list;
+    }
+
+    public Task getTask(int id) {
+        try {
+            return list.get(id);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Task not found");
+        }
     }
 }
