@@ -33,4 +33,9 @@ public class TaskRepository {
             throw new IllegalArgumentException("Task not found");
         }
     }
+
+    public void addTask(Task task) {
+        task.setId((long) list.size());
+        list.add(task);
+    }
 }

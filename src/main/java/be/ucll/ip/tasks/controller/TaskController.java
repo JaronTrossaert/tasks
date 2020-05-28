@@ -1,12 +1,14 @@
 package be.ucll.ip.tasks.controller;
 
+import be.ucll.ip.tasks.dto.TaskDTO;
 import be.ucll.ip.tasks.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/tasks")
@@ -33,5 +35,20 @@ public class TaskController {
             model.addAttribute("taskNotFound", e.getMessage());
         }
         return "task";
+    }
+
+    @GetMapping("/new")
+    public String getNewTaskForm(Model model) {
+        model.addAttribute("taskDTO", new TaskDTO());
+        return "new_task";
+    }
+
+    @PostMapping("/new")
+    public String postNewTask(@ModelAttribute @Valid TaskDTO taskDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new_task";
+        }
+        taskService.addTask(taskDTO);
+        return "redirect:/tasks";
     }
 }

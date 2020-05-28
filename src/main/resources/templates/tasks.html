@@ -15,7 +15,7 @@
         <th>Due date</th>
     </tr>
     <tr th:each="task : ${tasks}">
-        <td><a th:href="@{~/tasks/{id}(id=${task.id})}" th:text="${task.title}"></a></td>
+        <td><a th:href="@{/tasks/{id}(id=${task.id})}" th:text="${task.title}"></a></td>
         <td th:text="${#temporals.format(task.dueDate, 'dd-MM-yyyy HH:mm')}"></td>
     </tr>
 </table>
