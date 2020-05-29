@@ -39,6 +39,17 @@ public class TaskServiceImpl implements TaskService {
         repository.save(task);
     }
 
+    @Override
+    public void editTask(TaskDTO taskDTO) {
+        // TODO think about throwing this exception is useful
+        Task task = repository.findById(taskDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Task not found"));
+        task.setTitle(taskDTO.getTitle());
+        task.setDescription(taskDTO.getDescription());
+        task.setDueDate(taskDTO.getDueDate());
+        repository.save(task);
+    }
+
     private TaskDTO convert(Task task) {
         TaskDTO dto = new TaskDTO();
         dto.setId(task.getId());

@@ -28,9 +28,9 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public String getTask(Model model, @PathVariable("id") int id) {
+    public String getTask(Model model, @PathVariable("id") long id) {
         try {
-            model.addAttribute("task", taskService.getTask((long) id));
+            model.addAttribute("task", taskService.getTask(id));
         } catch (IllegalArgumentException e) {
             model.addAttribute("taskNotFound", e.getMessage());
         }
@@ -50,5 +50,26 @@ public class TaskController {
         }
         taskService.addTask(taskDTO);
         return "redirect:/tasks";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String getEditTaskForm(Model model, @PathVariable("id") long id) {
+        try {
+            model.addAttribute("task", taskService.getTask(id));
+            model.addAttribute("taskId", id);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("taskNotFound", e.getMessage());
+        }
+        return "edit_task";
+    }
+
+    @PostMapping("/edit")
+    public String postEditedTask(@ModelAttribute @Valid TaskDTO taskDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "edit_task";
+        }
+        // TODO add error handling for editing task
+        taskService.editTask(taskDTO);
+        return "redirect:/tasks/" + taskDTO.getId();
     }
 }

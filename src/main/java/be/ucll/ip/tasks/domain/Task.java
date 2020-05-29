@@ -17,6 +17,8 @@ public class Task {
     private String description;
     private LocalDateTime dueDate;
 
+    // TODO empty constructor for entity class?
+
     public Long getId() {
         return id;
     }
