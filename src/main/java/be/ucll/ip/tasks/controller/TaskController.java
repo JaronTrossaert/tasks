@@ -1,7 +1,8 @@
 package be.ucll.ip.tasks.controller;
 
-import be.ucll.ip.tasks.dto.TaskDTO;
-import be.ucll.ip.tasks.service.TaskService;
+import be.ucll.ip.tasks.model.dto.SubTaskDTO;
+import be.ucll.ip.tasks.model.dto.TaskDTO;
+import be.ucll.ip.tasks.model.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,5 +72,22 @@ public class TaskController {
         // TODO add error handling for editing task
         taskService.editTask(taskDTO);
         return "redirect:/tasks/" + taskDTO.getId();
+    }
+
+    @GetMapping("/{id}/sub/create")
+    public String getNewSubTaskForm(Model model, @PathVariable("id") Long id){
+        model.addAttribute("id", id );
+        model.addAttribute("subTaskDTO", new SubTaskDTO());
+        return "new_sub";
+    }
+
+    @PostMapping("/{id}/sub/create")
+    public String postNewSubTask(@PathVariable("id") Long id,
+                                 @ModelAttribute @Valid SubTaskDTO subTaskDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new_sub";
+        }
+        taskService.addSubTask(id, subTaskDTO);
+        return "redirect:/tasks/" + id;
     }
 }

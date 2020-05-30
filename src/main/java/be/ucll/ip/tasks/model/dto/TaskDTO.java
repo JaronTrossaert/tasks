@@ -1,9 +1,10 @@
-package be.ucll.ip.tasks.dto;
+package be.ucll.ip.tasks.model.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TaskDTO {
 
@@ -23,6 +24,8 @@ public class TaskDTO {
     @Future(message = "Due date must be a future date")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dueDate;
+
+    private List<SubTaskDTO> subTaskDTOs;
 
     public Long getId() {
         return id;
@@ -54,5 +57,17 @@ public class TaskDTO {
 
     public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public List<SubTaskDTO> getSubTaskDTOs() {
+        return subTaskDTOs;
+    }
+
+    public void setSubTaskDTOs(List<SubTaskDTO> subTaskDTOs) {
+        this.subTaskDTOs = subTaskDTOs;
+    }
+
+    public void addSubTaskDTO(SubTaskDTO subTaskDTO){
+        this.subTaskDTOs.add(subTaskDTO);
     }
 }

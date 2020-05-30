@@ -1,13 +1,9 @@
-package be.ucll.ip.tasks.domain;
+package be.ucll.ip.tasks.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.persistence.*;
 
 @Entity
-public class Task {
+public class SubTask {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,7 +11,9 @@ public class Task {
 
     private String title;
     private String description;
-    private LocalDateTime dueDate;
+
+    @ManyToOne
+    private Task task;
 
     // TODO empty constructor for entity class?
 
@@ -43,11 +41,11 @@ public class Task {
         this.description = description;
     }
 
-    public LocalDateTime getDueDate() {
-        return dueDate;
+    public Task getTask() {
+        return task;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
-        this.dueDate = dueDate;
+    public void setTask(Task task) {
+        this.task = task;
     }
 }

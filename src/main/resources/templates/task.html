@@ -22,6 +22,23 @@
         <label for="dueDate">Due date:</label>
         <span id="dueDate" th:text="${#temporals.format(task.dueDate, 'dd-MM-yyyy HH:mm')}"></span>
     </div>
+    <div th:if="${task.subTaskDTOs.isEmpty()}">No subtasks</div>
+    <div th:unless="${task.subTaskDTOs.isEmpty()}">
+        <label for="subTaskDTOs">Subtasks:</label>
+        <table id="subTaskDTOs">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+            <tr th:each="subTask: ${task.subTaskDTOs}">
+                <td th:text="${subTask.title}"></td>
+                <td th:text="${subTask.description}"></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <span><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}">Add a subtask</a></span>
+    </div>
 </div>
 
 </body>

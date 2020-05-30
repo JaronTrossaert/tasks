@@ -1,6 +1,7 @@
-package be.ucll.ip.tasks.service;
+package be.ucll.ip.tasks.model.service;
 
-import be.ucll.ip.tasks.dto.TaskDTO;
+import be.ucll.ip.tasks.model.dto.SubTaskDTO;
+import be.ucll.ip.tasks.model.dto.TaskDTO;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface TaskService {
     void addTask(TaskDTO taskDTO);
 
     void editTask(TaskDTO taskDTO);
+
+    void addSubTask(Long id, SubTaskDTO subTaskDTO);
 }
