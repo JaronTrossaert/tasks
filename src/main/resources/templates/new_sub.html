@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<div th:insert="fragments/nav.html :: #nav"></div>
+
 <h1>New subtask</h1>
 
 <form method="post" th:action="@{/tasks/{id}/sub/create(id=${id})}" th:object="${subTaskDTO}">

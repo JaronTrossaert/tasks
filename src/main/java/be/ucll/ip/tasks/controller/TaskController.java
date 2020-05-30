@@ -90,4 +90,9 @@ public class TaskController {
         taskService.addSubTask(id, subTaskDTO);
         return "redirect:/tasks/" + id;
     }
+
+    @RequestMapping(path = "/")
+    public String index(){
+        return "index";
+    }
 }
