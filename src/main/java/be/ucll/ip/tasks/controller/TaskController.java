@@ -72,7 +72,7 @@ public class TaskController {
         }
         // TODO add error handling for editing task
         taskService.editTask(taskDTO);
-        return "redirect:/tasks/" + taskDTO.getId();
+        return "redirect:/tasks" + "/" + taskDTO.getId();
     }
 
     @GetMapping("/{id}/sub/create")
@@ -89,7 +89,7 @@ public class TaskController {
             return "new_sub";
         }
         taskService.addSubTask(id, subTaskDTO);
-        return "redirect:/tasks/" + id;
+        return "redirect:/tasks" + "/" + + id;
     }
 
     @RequestMapping(path = "/")

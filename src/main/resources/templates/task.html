@@ -13,6 +13,9 @@
 <div th:if="${taskNotFound}"><span th:text="${taskNotFound}"></span></div>
 <div th:unless="${taskNotFound}">
     <div>
+        <p><a th:href="@{/tasks/edit/{id}(id=${task.id})}">Edit task</a></p>
+    </div>
+    <div>
         <label for="title">Title:</label>
         <span id="title" th:text="${task.title}"></span>
     </div>
