@@ -1,5 +1,7 @@
 package be.ucll.ip.tasks.model.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -7,15 +9,20 @@ import java.util.List;
 @Entity
 public class Task {
 
+    // Native generator to keep generated ID's separate between entities
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(
+            name = "native",
+            strategy = "native"
+    )
     private Long id;
 
     private String title;
     private String description;
     private LocalDateTime dueDate;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<SubTask> subTasks;
 
     // TODO empty constructor for entity class?
@@ -60,7 +67,7 @@ public class Task {
         this.subTasks = subTasks;
     }
 
-    public void addSubTask(SubTask subTask){
+    public void addSubTask(SubTask subTask) {
         this.subTasks.add(subTask);
     }
 }
