@@ -2,38 +2,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Task detail</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title th:text="#{taskDetail}"></title>
 </head>
 <body>
 
 <div th:insert="fragments/nav.html :: #nav"></div>
 
-<h1>Task detail</h1>
+<h1 th:text="#{taskDetail}"></h1>
 
 <div th:if="${taskNotFound}"><span th:text="${taskNotFound}"></span></div>
 <div th:unless="${taskNotFound}">
     <div>
-        <p><a th:href="@{/tasks/edit/{id}(id=${task.id})}">Edit task</a></p>
+        <p><a th:href="@{/tasks/edit/{id}(id=${task.id})}" th:text="#{editTask}"></a></p>
     </div>
     <div>
-        <label for="title">Title:</label>
+        <label for="title" th:text="#{title}"></label>
         <span id="title" th:text="${task.title}"></span>
     </div>
     <div>
-        <label for="description">Description:</label>
+        <label for="description" th:text="#{description}"></label>
         <span id="description" th:text="${task.description}"></span>
     </div>
     <div>
-        <label for="dueDate">Due date:</label>
+        <label for="dueDate" th:text="#{dueDate}"></label>
         <span id="dueDate" th:text="${#temporals.format(task.dueDate, 'dd-MM-yyyy HH:mm')}"></span>
     </div>
-    <div th:if="${task.subTaskDTOs.isEmpty()}">No subtasks</div>
+    <div th:if="${task.subTaskDTOs.isEmpty()}" th:text="#{noSubTasks}"></div>
     <div th:unless="${task.subTaskDTOs.isEmpty()}">
-        <label for="subTaskDTOs">Subtasks:</label>
+        <label for="subTaskDTOs" th:text="#{subTasks}"></label>
         <table id="subTaskDTOs">
             <tr>
-                <th>Title</th>
-                <th>Description</th>
+                <th th:text="#{titleHeader}"></th>
+                <th th:text="#{descriptionHeader}"></th>
             </tr>
             <tr th:each="subTask: ${task.subTaskDTOs}">
                 <td th:text="${subTask.title}"></td>
@@ -42,9 +43,11 @@
         </table>
     </div>
     <div>
-        <span><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}">Add a subtask</a></span>
+        <span><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}" th:text="#{addSubTask}"></a></span>
     </div>
 </div>
+
+<script src="/js/locale.js"></script>
 
 </body>
 </html>

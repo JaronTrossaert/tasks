@@ -55,7 +55,6 @@ public class TaskController {
 
     @GetMapping("/edit/{id}")
     public String getEditTaskForm(Model model, @PathVariable("id") long id) {
-        // TODO add edit task shortcuts
         try {
             model.addAttribute("task", taskService.getTask(id));
             model.addAttribute("taskId", id);

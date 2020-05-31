@@ -2,38 +2,41 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit task</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title th:text="#{editTask}"></title>
 </head>
 <body>
 
 <div th:insert="fragments/nav.html :: #nav"></div>
 
-<h1>Edit task</h1>
+<h1 th:text="#{editTask}"></h1>
 
 <div th:if="${taskNotFound}"><span th:text="${taskNotFound}"></span></div>
 <div th:unless="${taskNotFound}">
     <form method="post" th:action="@{/tasks/edit}" th:object="${task}">
         <div>
-            <label for="title">Title:</label>
+            <label for="title" th:text="#{title}"></label>
             <input type="text" id="title" th:field="*{title}" th:value="${task.title}">
             <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
         </div>
         <div>
-            <label for="description">Description:</label>
+            <label for="description" th:text="#{description}"></label>
             <input type="text" id="description" th:field="*{description}" th:value="${task.description}">
             <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
         </div>
         <div>
-            <label for="dueDate">Due date:</label>
+            <label for="dueDate" th:text="#{dueDate}"></label>
             <input type="datetime-local" id="dueDate" th:field="*{dueDate}" th:value="${task.dueDate}">
             <p th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}"></p>
         </div>
         <div>
             <input type="hidden" th:value="${task.id}" name="id">
         </div>
-        <input type="submit" value="Submit">
+        <input type="submit" th:value="#{submit}">
     </form>
 </div>
+
+<script src="/js/locale.js"></script>
 
 </body>
 </html>

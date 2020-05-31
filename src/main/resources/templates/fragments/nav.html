@@ -2,11 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <header id="nav" class="nav">
-    <ul>
-        <li> <a href="/">Home</a></li>
-        <li> <a href="/tasks">Task overview</a></li>
-        <li><a href="/tasks/new">Create task</a></li>
-    </ul>
+    <nav>
+        <ul>
+            <li><a href="/" th:text="#{home}"></a></li>
+            <li><a href="/tasks" th:text="#{overview}"></a></li>
+            <li><a href="/tasks/new" th:text="#{createTask}"></a></li>
+        </ul>
+        <label for="locales" th:text="#{language}"></label>
+        <select id="locales">
+            <option value=""></option>
+            <option value="en"th:text="#{english}"></option>
+            <option value="nl"th:text="#{dutch}"></option>
+        </select>
+    </nav>
 </header>
 </body>
 </html>

@@ -2,25 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Task overview</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title th:text="#{overview}"></title>
 </head>
 <body>
 
 <div th:insert="fragments/nav.html :: #nav"></div>
 
-<h1>Tasks</h1>
+<h1 th:text="#{tasks}"></h1>
 
-<p th:if="${tasks.isEmpty()}">No tasks left to do</p>
+<p th:if="${tasks.isEmpty()}" th:text="#{noTasks}"></p>
 <table th:unless="${tasks.isEmpty()}">
     <tr>
-        <th>Title</th>
-        <th>Due date</th>
+        <th th:text="#{titleHeader}"></th>
+        <th th:text="#{dueDateHeader}"></th>
     </tr>
     <tr th:each="task : ${tasks}">
         <td><a th:href="@{/tasks/{id}(id=${task.id})}" th:text="${task.title}"></a></td>
         <td th:text="${#temporals.format(task.dueDate, 'dd-MM-yyyy HH:mm')}"></td>
     </tr>
 </table>
+
+<script src="/js/locale.js"></script>
 
 </body>
 </html>
