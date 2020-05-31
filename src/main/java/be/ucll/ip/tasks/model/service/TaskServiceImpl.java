@@ -42,6 +42,7 @@ public class TaskServiceImpl implements TaskService {
         task.setTitle(taskDTO.getTitle());
         task.setDescription(taskDTO.getDescription());
         task.setDueDate(taskDTO.getDueDate());
+        task.setSubTasks(new ArrayList<>());
         taskRepository.save(task);
     }
 
@@ -53,6 +54,7 @@ public class TaskServiceImpl implements TaskService {
         task.setTitle(taskDTO.getTitle());
         task.setDescription(taskDTO.getDescription());
         task.setDueDate(taskDTO.getDueDate());
+        // editing of subtasks not supported
         taskRepository.save(task);
     }
 
