@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <header id="nav" class="nav">
     <nav>
@@ -7,7 +7,12 @@
             <li><a href="/" th:text="#{home}"></a></li>
             <li><a href="/tasks" th:text="#{overview}"></a></li>
             <li><a href="/tasks/new" th:text="#{createTask}"></a></li>
+            <li><a sec:authorize="!isAuthenticated()" th:text="#{register}" th:href="@{/register}"></a></li>
+            <li><a sec:authorize="!isAuthenticated()" th:text="#{login}" th:href="@{/login}"></a></li>
         </ul>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <button th:text="#{logout}" type="submit"></button>
+        </form>
         <label for="locales" th:text="#{language}"></label>
         <select id="locales">
             <option value=""></option>
