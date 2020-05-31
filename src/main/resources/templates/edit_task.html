@@ -11,7 +11,7 @@
 
 <h1 th:text="#{editTask}"></h1>
 
-<div th:if="${taskNotFound}"><span th:text="${taskNotFound}"></span></div>
+<div th:if="${taskNotFound}"><span th:text="#{taskNotFound}"></span></div>
 <div th:unless="${taskNotFound}">
     <form method="post" th:action="@{/tasks/edit}" th:object="${task}">
         <div>
