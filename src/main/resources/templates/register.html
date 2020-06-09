@@ -22,6 +22,14 @@
         <input type="password" id="password" th:field="*{password}">
         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
     </div>
+    <div>
+        <label for="userRole" th:text="#{userRole}"></label>
+        <select id="userRole" name="userRole" th:field="*{userRole}">
+            <option th:each="userRole: ${T(be.ucll.ip.tasks.model.UserRole).values()}"
+                    th:value="${userRole}" th:text="${userRole}">
+        </select>
+        <p th:if="${#fields.hasErrors('userRole')}" th:errors="*{userRole}"></p>
+    </div>
     <input type="submit" th:value="#{register}">
 </form>
 
