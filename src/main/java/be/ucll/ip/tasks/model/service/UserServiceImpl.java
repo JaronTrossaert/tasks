@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("User already exists");
         }
         User user = new User();
+        user.setUsername(userDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setRole(userDTO.getUsername().endsWith("a") ? UserRole.ADMIN : UserRole.USER);
         user = repository.save(user);
