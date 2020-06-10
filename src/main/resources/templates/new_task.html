@@ -13,6 +13,11 @@
 
 <form method="post" th:action="@{/tasks/new}" th:object="${taskDTO}">
     <div>
+        <label for="project" th:text="#{project}"></label>
+        <input type="text" id="project" th:field="*{project}">
+        <p th:if="${#fields.hasErrors('project')}" th:errors="*{project}"></p>
+    </div>
+    <div>
         <label for="title" th:text="#{title}"></label>
         <input type="text" id="title" th:field="*{title}">
         <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>

@@ -25,6 +25,9 @@ public class Task {
     @OneToMany(mappedBy = "task", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<SubTask> subTasks;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Project project;
+
     // TODO empty constructor for entity class?
 
     public Long getId() {
@@ -69,5 +72,13 @@ public class Task {
 
     public void addSubTask(SubTask subTask) {
         this.subTasks.add(subTask);
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

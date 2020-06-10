@@ -27,7 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/**").permitAll()
                 .mvcMatchers(
                         "/tasks/new", "/tasks/edit/{id}",
-                        "/tasks/edit", "/tasks/{id}/sub/create"
+                        "/tasks/edit", "/tasks/{id}/sub/create",
+                        "/tasks/project/new"
                 ).hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()

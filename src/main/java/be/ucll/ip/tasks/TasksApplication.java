@@ -23,7 +23,7 @@ public class TasksApplication {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
 
-	@Bean
+/*	@Bean
 	public CommandLineRunner demo(TaskRepository taskRepository) {
 		return (args) -> {
 			// save a dummy task
@@ -33,6 +33,6 @@ public class TasksApplication {
 			task1.setDueDate(LocalDateTime.of(2020, 10, 10, 10, 10));
 			taskRepository.save(task1);
 		};
-	}
+	}*/
 
 }

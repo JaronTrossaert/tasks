@@ -17,6 +17,10 @@
         <p><a th:href="@{/tasks/edit/{id}(id=${task.id})}" th:text="#{editTask}"></a></p>
     </div>
     <div>
+        <label for="project" th:text="#{project}"></label>
+        <span id="project" th:text="${task.project.name}"></span>
+    </div>
+    <div>
         <label for="title" th:text="#{title}"></label>
         <span id="title" th:text="${task.title}"></span>
     </div>

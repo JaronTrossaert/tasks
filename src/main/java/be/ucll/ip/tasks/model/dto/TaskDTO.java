@@ -1,5 +1,6 @@
 package be.ucll.ip.tasks.model.dto;
 
+import be.ucll.ip.tasks.model.entity.Project;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
@@ -26,6 +27,8 @@ public class TaskDTO {
     private LocalDateTime dueDate;
 
     private List<SubTaskDTO> subTaskDTOs;
+
+    private Project project;
 
     public Long getId() {
         return id;
@@ -69,5 +72,13 @@ public class TaskDTO {
 
     public void addSubTaskDTO(SubTaskDTO subTaskDTO){
         this.subTaskDTOs.add(subTaskDTO);
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }
