@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title th:text="#{error403}"></title>
+</head>
+<body>
+
+<div th:insert="fragments/nav.html :: #nav"></div>
+
+<h1 th:text="#{accessDenied}"></h1>
+
+<p th:text="#{errorInfo}"></p>
+
+<script src="/js/locale.js"></script>
+
+</body>
+</html>

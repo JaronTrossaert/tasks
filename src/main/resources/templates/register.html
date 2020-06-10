@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title th:text="#{register}"></title>
+</head>
+<body>
+
+<div th:insert="fragments/nav.html :: #nav"></div>
+
+<h1 th:text="#{register}"></h1>
+
+<form method="post" th:action="@{/register}" th:object="${user}">
+    <div>
+        <label for="username" th:text="#{username}"></label>
+        <input type="text" id="username" th:field="*{username}">
+        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+    </div>
+    <div>
+        <label for="password" th:text="#{password}"></label>
+        <input type="password" id="password" th:field="*{password}">
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+    </div>
+    <div>
+        <label for="userRole" th:text="#{userRole}"></label>
+        <select id="userRole" name="userRole" th:field="*{userRole}">
+            <option th:each="userRole: ${T(be.ucll.ip.tasks.model.UserRole).values()}"
+                    th:value="${userRole}" th:text="${userRole}">
+        </select>
+        <p th:if="${#fields.hasErrors('userRole')}" th:errors="*{userRole}"></p>
+    </div>
+    <input type="submit" th:value="#{register}">
+</form>
+
+<p th:if="${param.error}" th:text="#{userExists}"></p>
+
+<script src="/js/locale.js"></script>
+
+</body>
+</html>

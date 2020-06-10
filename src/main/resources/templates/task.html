@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -13,8 +13,12 @@
 
 <div th:if="${taskNotFound}"><span th:text="#{taskNotFound}"></span></div>
 <div th:unless="${taskNotFound}">
-    <div>
+    <div sec:authorize="hasAuthority('ADMIN')">
         <p><a th:href="@{/tasks/edit/{id}(id=${task.id})}" th:text="#{editTask}"></a></p>
+    </div>
+    <div>
+        <label for="project" th:text="#{project}"></label>
+        <span id="project" th:text="${task.project.name}"></span>
     </div>
     <div>
         <label for="title" th:text="#{title}"></label>
@@ -42,7 +46,7 @@
             </tr>
         </table>
     </div>
-    <div>
+    <div sec:authorize="hasAuthority('ADMIN')">
         <span><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}" th:text="#{addSubTask}"></a></span>
     </div>
 </div>

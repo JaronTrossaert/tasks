@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <header id="nav" class="nav">
     <nav>
         <ul>
             <li><a href="/" th:text="#{home}"></a></li>
             <li><a href="/tasks" th:text="#{overview}"></a></li>
-            <li><a href="/tasks/new" th:text="#{createTask}"></a></li>
+            <li sec:authorize="hasAuthority('ADMIN')"><a href="/tasks/new" th:text="#{createTask}"></a></li>
+            <li sec:authorize="!isAuthenticated()"><a th:text="#{register}" th:href="@{/register}"></a></li>
+            <li sec:authorize="!isAuthenticated()"><a th:text="#{login}" th:href="@{/login}"></a></li>
         </ul>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <button th:text="#{logout}" type="submit"></button>
+        </form>
         <label for="locales" th:text="#{language}"></label>
         <select id="locales">
             <option value=""></option>
-            <option value="en"th:text="#{english}"></option>
-            <option value="nl"th:text="#{dutch}"></option>
+            <option value="en" th:text="#{english}"></option>
+            <option value="nl" th:text="#{dutch}"></option>
         </select>
     </nav>
 </header>
